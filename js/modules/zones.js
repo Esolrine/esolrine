@@ -70,12 +70,17 @@ export class ZoneManager {
     }
 
     activateNextMobileZone() {
+        console.log('[Mobile] Activating next zone. Current index:', this.currentMobileZoneIndex);
+
         if (this.currentMobileZoneIndex >= this.mobileZoneOrder.length) {
             // Toutes les zones normales sont activées
             this.allNormalZonesCompleted = true;
+            console.log('[Mobile] All normal zones completed!');
 
-            // Vérifier immédiatement si Athulan est disponible
-            this.checkForAthulanActivation();
+            // Forcer une vérification immédiate d'Athulan
+            setTimeout(() => {
+                this.checkForAthulanActivation();
+            }, 500);
             return;
         }
 
@@ -293,6 +298,42 @@ export class ZoneManager {
         });
     }
 
+    checkForAthulanActivation() {
+        console.log('[Athulan Check] Checking activation conditions...');
+        console.log('- isMobile:', this.isMobile);
+        console.log('- allNormalZonesCompleted:', this.allNormalZonesCompleted);
+        console.log('- data-realm:', document.body.getAttribute('data-realm'));
+
+        // Ne vérifier que sur mobile et si toutes les zones normales sont complétées
+        if (!this.isMobile || !this.allNormalZonesCompleted) {
+            return;
+        }
+
+        // Vérifier si le mode Athulan est actif
+        if (document.body.getAttribute('data-realm') === 'athulan') {
+            const athulanZone = document.querySelector('.zone-athulan');
+            console.log('- Athulan zone found:', !!athulanZone);
+            console.log('- Already activated:', this.activatedZones.has('athulan'));
+
+            if (athulanZone && !this.activatedZones.has('athulan')) {
+                console.log('[Athulan] Activating zone on mobile...');
+
+                // S'assurer que la zone est visible
+                athulanZone.style.display = 'block';
+
+                // Ajouter l'attribut data-zone si manquant
+                if (!athulanZone.dataset.zone) {
+                    athulanZone.dataset.zone = 'athulan';
+                }
+
+                // Activer la zone Athulan après un délai
+                setTimeout(() => {
+                    this.activateMobileZone(athulanZone);
+                }, 1000);
+            }
+        }
+    }
+
     // Méthode appelée par StoryManager quand une histoire est fermée sur mobile
     onMobileStoryClosed(zoneNumber) {
         if (!this.isMobile) return;
@@ -319,33 +360,44 @@ export class ZoneManager {
         }
         // Si c'était Athulan, on a fini
         else if (zoneNumber === 'athulan') {
-            console.log('Toutes les zones ont été explorées, y compris Athulan !');
+            console.log('[Athulan] All zones explored, including Athulan!');
             this.waitingForStoryRead = false;
+
+            // Optionnel : Ajouter un effet de fin ou un message
+            this.showCompletionEffect();
         }
     }
 
-    // Méthode pour vérifier manuellement si on doit activer Athulan
-    checkForAthulanActivation() {
-        // Ne vérifier que sur mobile et si toutes les zones normales sont complétées
-        if (!this.isMobile || !this.allNormalZonesCompleted) {
-            return;
-        }
+    // Nouvelle méthode pour afficher un effet de complétion
+    showCompletionEffect() {
+        // Ajouter un effet visuel subtil pour indiquer la fin
+        const athulanZone = document.querySelector('.zone-athulan');
+        if (athulanZone) {
+            athulanZone.classList.add('final-glow');
 
-        // Vérifier si le mode Athulan est actif
-        if (document.body.getAttribute('data-realm') === 'athulan') {
-            const athulanZone = document.querySelector('.zone-athulan');
+            // Créer un style temporaire pour l'effet
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes finalGlow {
+                    0%, 100% { 
+                        box-shadow: 0 0 80px rgba(138, 43, 226, 0.3),
+                                   inset 0 0 60px rgba(75, 0, 130, 0.2);
+                    }
+                    50% { 
+                        box-shadow: 0 0 120px rgba(138, 43, 226, 0.6),
+                                   inset 0 0 80px rgba(75, 0, 130, 0.4);
+                    }
+                }
+                .final-glow {
+                    animation: finalGlow 4s ease-in-out 3;
+                }
+            `;
+            document.head.appendChild(style);
 
-            if (athulanZone && !this.activatedZones.has('athulan')) {
-                console.log('Activating Athulan zone on mobile...');
-
-                // S'assurer que la zone est visible
-                athulanZone.style.display = 'block';
-
-                // Activer la zone Athulan après un délai
-                setTimeout(() => {
-                    this.activateMobileZone(athulanZone);
-                }, 1000);
-            }
+            setTimeout(() => {
+                athulanZone.classList.remove('final-glow');
+                style.remove();
+            }, 12000);
         }
     }
 

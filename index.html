@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/athulan.css">
     <link rel="stylesheet" href="css/controls.css">
+    <link rel="stylesheet" href="css/language.css">
     <!-- The ancient realm awaits those who speak its name -->
     <meta name="hidden-gateway" content="athulan-portal">
 </head>
@@ -75,6 +76,25 @@
                 <path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734c4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.189-.096-.476-.564-.476-.564s-.547-.684-.631-.799c-.084-.116-.38-.419-.38-.419s-.043-.073-.103-.073c-.061 0-.105.073-.105.073s-.295.303-.38.419c-.084.115-.63.799-.63.799s-.288.468-.477.564c-.19.096-.31-.023-.31-.023s-2.765-2.523-4.011-3.976c-1.246-1.453-1.004-2.515-.621-2.876c.382-.36 1.388-.667 2.765.08c1.377.748 2.511 2.227 2.511 2.227l.001-.007s1.134-1.479 2.511-2.227c1.378-.747 2.384-.44 2.766-.08c.382.361.624 1.423-.622 2.876z"/>
             </svg>
         </a>
+    </div>
+
+    <div class="language-selector">
+        <button class="language-toggle" id="languageToggle" title="Change Language">
+            <span class="language-current">FR</span>
+            <svg class="language-icon" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+        </button>
+        <div class="language-dropdown" id="languageDropdown">
+            <button class="language-option" data-lang="fr">
+                <span class="flag">🇫🇷</span>
+                <span class="lang-name">Français</span>
+            </button>
+            <button class="language-option" data-lang="en">
+                <span class="flag">🇬🇧</span>
+                <span class="lang-name">English</span>
+            </button>
+        </div>
     </div>
 </div>
 

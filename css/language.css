@@ -1,0 +1,224 @@
+/* Language Selector Styles */
+.language-selector {
+    position: relative;
+}
+
+.language-toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.language-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+}
+
+.language-current {
+    position: absolute;
+    font-family: 'Kalam', cursive;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+
+.language-icon {
+    width: 24px;
+    height: 24px;
+    fill: rgba(255, 255, 255, 0.6);
+    opacity: 0.3;
+    position: absolute;
+}
+
+.language-toggle:hover .language-icon {
+    opacity: 0.5;
+    animation: globeSpin 2s ease-in-out infinite;
+}
+
+/* Dropdown Menu */
+.language-dropdown {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1002;
+}
+
+.language-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+}
+
+/* Dropdown arrow */
+.language-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid rgba(255, 255, 255, 0.1);
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 140px;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Kalam', cursive;
+    font-size: 0.9rem;
+}
+
+.language-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateX(3px);
+}
+
+.language-option.active {
+    background: rgba(100, 200, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(100, 200, 255, 0.3);
+}
+
+.flag {
+    font-size: 1.2rem;
+    filter: saturate(0.8);
+}
+
+.lang-name {
+    flex: 1;
+    text-align: left;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .controls-container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .language-selector {
+        order: -1; /* Place it first on mobile */
+    }
+
+    .language-dropdown {
+        bottom: auto;
+        top: calc(100% + 10px);
+        left: 0;
+        transform: translateX(0) scale(0.9);
+    }
+
+    .language-dropdown.active {
+        transform: translateX(0) scale(1);
+    }
+
+    .language-dropdown::after {
+        top: auto;
+        bottom: 100%;
+        border-top: none;
+        border-bottom: 8px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Animations */
+@keyframes globeSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Language transition effect */
+.language-changing {
+    animation: languageChange 0.5s ease-out;
+}
+
+@keyframes languageChange {
+    0% {
+        opacity: 1;
+        filter: blur(0px);
+    }
+    50% {
+        opacity: 0.5;
+        filter: blur(2px);
+        transform: scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: scale(1);
+    }
+}
+
+/* Athulan mode modifications */
+body[data-realm="athulan"] .language-toggle {
+    background: rgba(138, 43, 226, 0.2);
+    border-color: rgba(138, 43, 226, 0.3);
+}
+
+body[data-realm="athulan"] .language-toggle:hover {
+    background: rgba(138, 43, 226, 0.3);
+    border-color: rgba(147, 112, 219, 0.5);
+    box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
+}
+
+body[data-realm="athulan"] .language-dropdown {
+    background: rgba(30, 20, 40, 0.95);
+    border-color: rgba(138, 43, 226, 0.2);
+}
+
+body[data-realm="athulan"] .language-option.active {
+    background: rgba(138, 43, 226, 0.2);
+    border-color: rgba(138, 43, 226, 0.4);
+}
+
+/* Distortion effect integration */
+.language-toggle.distortion-active {
+    filter: url(#distortionFilter);
+}
+
+/* Alternative flag style with gradients */
+.language-option[data-lang="fr"] .flag {
+    background: linear-gradient(90deg, #002395 33%, #FFFFFF 33%, #FFFFFF 66%, #ED2939 66%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.language-option[data-lang="en"] .flag {
+    filter: saturate(0.9) brightness(1.1);
+}

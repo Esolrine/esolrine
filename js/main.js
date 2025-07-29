@@ -7,6 +7,8 @@ import { StoryManager } from './modules/story.js';
 import { HandDrawnCursor } from './modules/cursor.js';
 import { AthulanMode } from './modules/athulan.js';
 import { MusicManager } from './modules/music.js';
+import { LanguageManager } from './modules/language.js';
+import { LanguageUI } from './modules/languageUI.js';
 
 class EsolrineGame {
     constructor() {
@@ -18,18 +20,29 @@ class EsolrineGame {
         this.cursor = null;
         this.athulanMode = null;
         this.musicManager = null;
+        this.languageManager = null;
+        this.languageUI = null;
 
         this.init();
     }
 
     init() {
-        // Check for Athulan mode first
+        // Initialize language manager first
+        this.languageManager = new LanguageManager();
+
+        // Initialize language UI
+        this.languageUI = new LanguageUI(this.languageManager);
+
+        // Check for Athulan mode
         this.athulanMode = new AthulanMode();
 
         // Initialize all modules
         this.lighting = new DynamicLighting();
         this.storyManager = new StoryManager();
         this.musicManager = new MusicManager();
+
+        // Connect language manager to story manager
+        this.storyManager.setLanguageManager(this.languageManager);
 
         this.fairy = new Fairy(this.lighting);
         this.zoneManager = new ZoneManager(this.fairy, this.lighting, this.storyManager);
@@ -47,7 +60,7 @@ class EsolrineGame {
         // Monitor URL changes
         this.setupURLMonitoring();
 
-        // NOUVEAU: Observer pour détecter les changements d'attribut sur body
+        // Observer pour détecter les changements d'attribut sur body
         this.setupRealmObserver();
     }
 

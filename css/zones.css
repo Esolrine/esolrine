@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+
+/* Base zone styles */
+.clickable-zone {
+    position: absolute;
+    border: 2px solid rgba(255, 255, 255, 0.01);
+    border-radius: 20px;
+    background: transparent;
+    transition: all 2s ease;
+    opacity: 1;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Zone positions */
+.zone-1 { top: 3vh; left: 3vw; width: 44vw; height: 44vh; }
+.zone-2 { top: 3vh; right: 3vw; width: 44vw; height: 44vh; }
+.zone-3 { bottom: 3vh; left: 3vw; width: 44vw; height: 44vh; }
+.zone-4 { bottom: 3vh; right: 3vw; width: 44vw; height: 44vh; }
+.zone-5 { top: 28vh; left: 28vw; width: 44vw; height: 44vh; }
+
+/* Question mark styles */
+.clickable-zone::before {
+    content: '?';
+    font-family: 'Kalam', cursive;
+    font-size: 8rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.01);
+    transition: all 0.3s ease;
+    position: absolute;
+    z-index: 5;
+    transform: rotate(-5deg) skewX(-5deg);
+    animation: handDrawnQuestion 4s ease-in-out infinite;
+}
+
+.zone-1::before { transform: rotate(-7deg) skewX(-3deg); animation-delay: 0s; }
+.zone-2::before { transform: rotate(3deg) skewX(5deg); animation-delay: 0.5s; }
+.zone-3::before { transform: rotate(-4deg) skewX(2deg); animation-delay: 1s; }
+.zone-4::before { transform: rotate(6deg) skewX(-4deg); animation-delay: 1.5s; }
+.zone-5::before { transform: rotate(-2deg) skewX(3deg); animation-delay: 2s; }
+
+/* Activating state */
+.clickable-zone.activating {
+    transition: all 0.1s ease;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    animation: loadingProgress 3s ease-in-out forwards;
+}
+
+.clickable-zone.activating::before {
+    color: rgba(255, 255, 255, 0.3);
+    animation: questionMarkAppear 6s ease-in-out forwards;
+    filter: url(#distortionFilter);
+}
+
+/* Permanently activated state */
+.clickable-zone.permanently-activated {
+    opacity: 0.2 !important;
+    border-radius: 35px 20px 40px 25px;
+    animation: gentleColorGlow 8s ease-in-out infinite;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(3px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: auto;
+    cursor: pointer;
+    filter: none;
+}
+
+/* IMPORTANT: Maintain position for ALL zones including athulan */
+.clickable-zone.permanently-activated.zone-1 { top: 3vh; left: 3vw; width: 44vw; height: 44vh; }
+.clickable-zone.permanently-activated.zone-2 { top: 3vh; right: 3vw; width: 44vw; height: 44vh; }
+.clickable-zone.permanently-activated.zone-3 { bottom: 3vh; left: 3vw; width: 44vw; height: 44vh; }
+.clickable-zone.permanently-activated.zone-4 { bottom: 3vh; right: 3vw; width: 44vw; height: 44vh; }
+.clickable-zone.permanently-activated.zone-5 { top: 28vh; left: 28vw; width: 44vw; height: 44vh; }
+
+.clickable-zone.permanently-activated::before {
+    color: rgba(255, 255, 255, 0);
+    text-shadow: none;
+    transition: all 0.5s ease;
+}
+
+.clickable-zone.permanently-activated.fade-in {
+    animation: imageAppearAndFade 4s ease-in-out forwards;
+    filter: none;
+}
+
+/* Book icon - ALWAYS VISIBLE on activated zones */
+.clickable-zone.permanently-activated::after {
+    content: '📖';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow:
+            0 0 8px rgba(0, 0, 0, 0.8),
+            0 0 12px rgba(0, 0, 0, 0.6),
+            0 0 16px rgba(255, 255, 255, 0.2);
+    z-index: 9999;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
+    animation: bookIcon 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+/* Zone-specific backgrounds */
+.zone-1.permanently-activated {
+    background-image: url('../assets/img/Tristesse.jpg');
+    border: 2px solid rgba(255, 130, 110, 0.2);
+    box-shadow: inset 0 0 60px rgba(255, 120, 100, 0.08), 0 0 20px rgba(255, 130, 110, 0.15);
+}
+
+.zone-2.permanently-activated {
+    background-image: url('../assets/img/Mariage.jpg');
+    border: 2px solid rgba(190, 130, 255, 0.2);
+    box-shadow: inset 0 0 60px rgba(180, 120, 255, 0.08), 0 0 20px rgba(190, 130, 255, 0.15);
+}
+
+.zone-3.permanently-activated {
+    background-image: url('../assets/img/Colere.jpg');
+    border: 2px solid rgba(130, 255, 190, 0.2);
+    box-shadow: inset 0 0 60px rgba(120, 255, 180, 0.08), 0 0 20px rgba(130, 255, 190, 0.15);
+}
+
+.zone-4.permanently-activated {
+    background-image: url('../assets/img/Peur.jpg');
+    border: 2px solid rgba(130, 210, 255, 0.2);
+    box-shadow: inset 0 0 60px rgba(120, 200, 255, 0.08), 0 0 20px rgba(130, 210, 255, 0.15);
+}
+
+.zone-5.permanently-activated {
+    background-image: url('../assets/img/Espoir.jpg');
+    border: 2px solid rgba(255, 225, 130, 0.2);
+    box-shadow: inset 0 0 60px rgba(255, 220, 120, 0.08), 0 0 20px rgba(255, 225, 130, 0.15);
+}
+
+/* Hover effects - Enhanced glow and book icon */
+.clickable-zone.permanently-activated:hover {
+    opacity: 1 !important;
+    filter: none;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+    border: 4px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+            0 0 30px rgba(255, 255, 255, 0.4),
+            inset 0 0 20px rgba(255, 255, 255, 0.1),
+            0 0 45px rgba(255, 255, 255, 0.3);
+}
+
+/* Make book icon more prominent on hover */
+.clickable-zone.permanently-activated:hover::after {
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow:
+            0 0 10px rgba(0, 0, 0, 0.9),
+            0 0 15px rgba(0, 0, 0, 0.7),
+            0 0 20px rgba(255, 255, 255, 0.4),
+            0 0 30px rgba(255, 255, 255, 0.3);
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.8));
+    animation: bookIconHover 1.5s ease-in-out infinite;
+}
+
+/* Zooming effect */
+.clickable-zone.zooming {
+    animation: zoneZoomEffect 0.5s ease-out forwards;
+    z-index: 10;
+}
+
+/* Distortion active */
+.clickable-zone.distortion-active {
+    filter: url(#distortionFilter);
+    transition: filter 0.5s ease;
+}
+
+.clickable-zone.permanently-activated.distortion-active {
+    filter: url(#distortionFilter) brightness(1.1);
+}
+
+/* Animation pour attirer l'attention sur le livre sur mobile */
+.clickable-zone.permanently-activated.book-pulse::after {
+    animation: bookPulse 2s ease-in-out infinite !important;
+}
+
+@keyframes bookPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1) rotate(-2deg);
+        opacity: 0.6;
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(2deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+    }
+}
+
+/* Sur mobile, augmenter la taille des zones pour faciliter le clic */
+@media (max-width: 768px) {
+    .clickable-zone.permanently-activated::after {
+        font-size: 5rem; /* Plus grand sur mobile */
+    }
+
+    .clickable-zone.permanently-activated:hover::after {
+        font-size: 5.5rem; /* Légèrement plus grand au hover/touch */
+    }
+}

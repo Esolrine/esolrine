@@ -1,0 +1,322 @@
+/* Zone animations */
+@keyframes handDrawnQuestion {
+    0%, 100% { transform: rotate(-5deg) skewX(-5deg) scale(1); }
+    25% { transform: rotate(-3deg) skewX(-7deg) scale(1.02); }
+    50% { transform: rotate(-7deg) skewX(-3deg) scale(0.98); }
+    75% { transform: rotate(-4deg) skewX(-6deg) scale(1.01); }
+}
+
+@keyframes loadingProgress {
+    0% {
+        border-color: rgba(255, 255, 255, 0.01);
+        box-shadow: 0 0 20px rgba(0, 0, 170, 0.01);
+    }
+    50% {
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 40px rgba(0, 0, 170, 0.2);
+    }
+    100% {
+        border-color: rgb(255, 255, 255);
+        box-shadow: 0 0 60px rgba(0, 0, 170, 0.4);
+    }
+}
+
+@keyframes questionMarkAppear {
+    0% {
+        color: rgba(255, 255, 255, 0.05);
+        transform: scale(0.8) rotate(-5deg) skewX(-5deg);
+    }
+    50% {
+        color: rgba(255, 255, 255, 0.2);
+        transform: scale(1.2) rotate(-5deg) skewX(-5deg);
+    }
+    100% {
+        color: rgba(255, 255, 255, 0.4);
+        transform: scale(1) rotate(-5deg) skewX(-5deg);
+    }
+}
+
+@keyframes gentleColorGlow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.002); }
+}
+
+@keyframes imageAppearAndFade {
+    0% { opacity: 0; transform: scale(0.95); }
+    25% { opacity: 1; transform: scale(1.05); }
+    50% { opacity: 1; transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bookAppear {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Book icon animation - continuous gentle pulse */
+@keyframes bookIcon {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1) rotate(-2deg);
+        opacity: 0.6;
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1) rotate(2deg);
+        opacity: 0.7;
+        filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.5));
+    }
+}
+
+/* Book icon animation on hover - more dynamic */
+@keyframes bookIconHover {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1) rotate(-5deg);
+        filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.8));
+    }
+    25% {
+        transform: translate(-50%, -50%) scale(1.15) rotate(5deg);
+        filter: drop-shadow(0 0 18px rgba(0, 0, 0, 0.6));
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.4));
+    }
+    75% {
+        transform: translate(-50%, -50%) scale(1.1) rotate(-3deg);
+        filter: drop-shadow(0 0 17px rgba(0, 0, 0, 0.6));
+    }
+}
+
+@keyframes zoneZoomEffect {
+    0% { transform: scale(1); }
+    50% {
+        transform: scale(1.05);
+        filter: brightness(1.2) saturate(1.2);
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+    }
+    100% {
+        transform: scale(1.02);
+        filter: brightness(1.1) saturate(1.1);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+    }
+}
+
+/* Background animations */
+@keyframes distantCelestialBodies {
+    0% { transform: translateX(0) translateY(0) rotate(0deg); }
+    25% { transform: translateX(-200px) translateY(-100px) rotate(90deg); }
+    50% { transform: translateX(-400px) translateY(-200px) rotate(180deg); }
+    75% { transform: translateX(-600px) translateY(-300px) rotate(270deg); }
+    100% { transform: translateX(-800px) translateY(-400px) rotate(360deg); }
+}
+
+@keyframes cosmicPulse {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+    25% { transform: scale(1.2) rotate(90deg); opacity: 0.6; }
+    50% { transform: scale(0.8) rotate(180deg); opacity: 0.4; }
+    75% { transform: scale(1.1) rotate(270deg); opacity: 0.7; }
+}
+
+@keyframes backgroundDistortion {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.002) rotate(0.05deg); }
+    50% { transform: scale(0.998) rotate(-0.05deg); }
+    75% { transform: scale(1.001) rotate(0.02deg); }
+}
+
+/* Fairy animations */
+@keyframes divineBreathing {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(100, 200, 255, 0.8)) brightness(1);
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 25px rgba(100, 200, 255, 1)) brightness(1.2);
+    }
+}
+
+@keyframes divineBreathingTired {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        filter: drop-shadow(0 0 15px rgba(100, 200, 255, 0.7)) brightness(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        filter: drop-shadow(0 0 18px rgba(100, 200, 255, 0.8)) brightness(1.1);
+    }
+}
+
+@keyframes divineBreathingExhausted {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(0.9) rotate(-1deg);
+        filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.5)) brightness(0.8);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1) rotate(1deg);
+        filter: drop-shadow(0 0 12px rgba(100, 200, 255, 0.6)) brightness(0.9);
+    }
+}
+
+@keyframes divineBreathingCollapsed {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(0.8) rotate(-2deg);
+        filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.3)) brightness(0.6);
+    }
+    25% {
+        transform: translate(-50%, -50%) scale(0.85) rotate(1deg);
+        filter: drop-shadow(0 0 6px rgba(100, 200, 255, 0.2)) brightness(0.5);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(0.9) rotate(2deg);
+        filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.4)) brightness(0.7);
+    }
+    75% {
+        transform: translate(-50%, -50%) scale(0.85) rotate(-1deg);
+        filter: drop-shadow(0 0 7px rgba(100, 200, 255, 0.25)) brightness(0.55);
+    }
+}
+
+@keyframes divineFleeing {
+    0%, 100% { transform: scale(1.2); }
+    50% { transform: scale(1.4); }
+}
+
+@keyframes divineCharging {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+@keyframes fairyCompleted {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1.6) saturate(1.8) drop-shadow(0 0 20px rgba(100, 200, 255, 0.8));
+    }
+    33% {
+        transform: scale(1.15) rotate(1deg);
+        filter: brightness(1.8) saturate(2) drop-shadow(0 0 25px rgba(100, 200, 255, 1));
+    }
+    66% {
+        transform: scale(1.05) rotate(-1deg);
+        filter: brightness(1.7) saturate(1.9) drop-shadow(0 0 22px rgba(100, 200, 255, 0.9));
+    }
+}
+
+@keyframes stumbling {
+    0%, 100% { transform: translate(-50%, -50%) rotate(-3deg); }
+    25% { transform: translate(-52%, -48%) rotate(2deg); }
+    50% { transform: translate(-48%, -52%) rotate(1deg); }
+    75% { transform: translate(-51%, -49%) rotate(-2deg); }
+}
+
+/* Orbital particles */
+@keyframes orbit1 {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(35px) rotate(0deg);
+        opacity: 1;
+    }
+    50% { opacity: 0.6; }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(35px) rotate(-360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes orbit2 {
+    0% {
+        transform: translate(-50%, -50%) rotate(120deg) translateX(45px) rotate(-120deg);
+        opacity: 0.8;
+    }
+    50% { opacity: 0.4; }
+    100% {
+        transform: translate(-50%, -50%) rotate(480deg) translateX(45px) rotate(-480deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes orbit3 {
+    0% {
+        transform: translate(-50%, -50%) rotate(240deg) translateX(25px) rotate(-240deg);
+        opacity: 0.9;
+    }
+    50% { opacity: 0.5; }
+    100% {
+        transform: translate(-50%, -50%) rotate(600deg) translateX(25px) rotate(-600deg);
+        opacity: 0.9;
+    }
+}
+
+/* Filter animations */
+
+@keyframes filmGrain {
+    0% { transform: translate(0px, 0px); }
+    25% { transform: translate(-1px, 1px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, -1px); }
+    100% { transform: translate(1px, 1px); }
+}
+
+@keyframes mangaSpeed {
+    0%, 100% { transform: translateX(-100%); opacity: 0; }
+    50% { transform: translateX(100%); opacity: 1; }
+}
+
+/* Story animations */
+@keyframes storyContainerAppear {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes storyTitleAppear {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes storyCloseButtonAppear {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes storyParticleFloat {
+    0% {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+@keyframes decorFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(10px, -10px) scale(1.1); }
+}
+
+@keyframes cursorCenterPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.6;
+    }
+}
+
+@keyframes trailFade {
+    0% {
+        opacity: 0.5;
+        transform: scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(180deg);
+    }
+}

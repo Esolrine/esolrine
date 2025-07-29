@@ -1,0 +1,213 @@
+/* Space background effects */
+
+.space-depth-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 120%; height: 120%;
+    background:
+            radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.8), transparent),
+            radial-gradient(2px 2px at 80% 10%, rgba(255,255,255,0.9), transparent),
+            radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.6), transparent),
+            radial-gradient(2px 2px at 30% 80%, rgba(255,255,255,1), transparent),
+            radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.7), transparent),
+            radial-gradient(1px 1px at 45% 30%, rgba(255,255,255,0.5), transparent),
+            radial-gradient(2px 2px at 70% 85%, rgba(255,255,255,0.8), transparent),
+            radial-gradient(1px 1px at 25% 50%, rgba(255,255,255,0.6), transparent),
+            radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,0.4), transparent),
+            radial-gradient(2px 2px at 15% 75%, rgba(255,255,255,0.9), transparent),
+            radial-gradient(1px 1px at 5% 10%, rgba(255,255,255,0.7), transparent),
+            radial-gradient(2px 2px at 12% 35%, rgba(255,255,255,0.8), transparent),
+            radial-gradient(1px 1px at 18% 60%, rgba(255,255,255,0.5), transparent),
+            radial-gradient(2px 2px at 22% 75%, rgba(255,255,255,0.9), transparent),
+            radial-gradient(1px 1px at 28% 15%, rgba(255,255,255,0.6), transparent),
+            radial-gradient(2px 2px at 35% 40%, rgba(255,255,255,0.7), transparent),
+            radial-gradient(1px 1px at 42% 65%, rgba(255,255,255,0.8), transparent),
+            radial-gradient(2px 2px at 48% 80%, rgba(255,255,255,0.5), transparent),
+            radial-gradient(1px 1px at 55% 25%, rgba(255,255,255,0.9), transparent),
+            radial-gradient(2px 2px at 62% 50%, rgba(255,255,255,0.6), transparent),
+            radial-gradient(1px 1px at 68% 75%, rgba(255,255,255,0.7), transparent),
+            radial-gradient(2px 2px at 75% 10%, rgba(255,255,255,0.8), transparent),
+            radial-gradient(1px 1px at 82% 35%, rgba(255,255,255,0.5), transparent),
+            radial-gradient(2px 2px at 88% 60%, rgba(255,255,255,0.9), transparent),
+            radial-gradient(1px 1px at 95% 85%, rgba(255,255,255,0.6), transparent),
+            radial-gradient(2px 2px at 20% 10%, rgba(255,255,255,0.7), transparent),
+            radial-gradient(1px 1px at 40% 90%, rgba(255,255,255,0.8), transparent),
+            radial-gradient(2px 2px at 60% 15%, rgba(255,255,255,0.5), transparent),
+            radial-gradient(1px 1px at 80% 50%, rgba(255,255,255,0.9), transparent),
+            radial-gradient(2px 2px at 90% 70%, rgba(255,255,255,0.6), transparent);
+    transition: transform 1s ease-out;
+    z-index: -2;
+}
+
+/* Fairy entity */
+.blue-entity {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, rgba(100, 200, 255, 1) 0%, rgba(150, 220, 255, 0.8) 30%, rgba(200, 240, 255, 0.4) 60%, transparent 100%);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: none;
+    z-index: 15;
+    filter: drop-shadow(0 0 15px rgba(100, 200, 255, 0.8));
+    animation: divineBreathing 2s ease-in-out infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Energy states */
+.blue-entity.energy-high {
+    filter: drop-shadow(0 0 20px rgba(100, 200, 255, 1)) brightness(1.2);
+    animation: divineBreathing 2s ease-in-out infinite;
+}
+
+.blue-entity.energy-medium {
+    filter: drop-shadow(0 0 15px rgba(100, 200, 255, 0.7)) brightness(1);
+    animation: divineBreathingTired 3.5s ease-in-out infinite;
+}
+
+.blue-entity.energy-low {
+    filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.5)) brightness(0.8);
+    animation: divineBreathingExhausted 4.5s ease-in-out infinite;
+}
+
+.blue-entity.energy-exhausted {
+    filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.3)) brightness(0.6);
+    animation: divineBreathingCollapsed 6s ease-in-out infinite;
+}
+
+/* State modifiers */
+.blue-entity.stumbling {
+    animation: stumbling 0.3s ease-in-out infinite;
+}
+
+.blue-entity.fleeing {
+    animation: divineFleeing 0.5s ease infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 150, 100, 0.8)) brightness(1.3);
+}
+
+.blue-entity.zone-activating {
+    animation: divineCharging 0.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(100, 255, 100, 1)) brightness(1.5);
+}
+
+.blue-entity.zone-completed {
+    filter: brightness(1.6) saturate(1.8) drop-shadow(0 0 20px rgba(100, 200, 255, 0.8));
+    animation: fairyCompleted 3s ease-in-out infinite;
+}
+
+/* Orbital particles */
+.orbital-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 8;
+}
+
+.orbital-particle:nth-child(1) { animation: orbit1 4s linear infinite; }
+.orbital-particle:nth-child(2) { animation: orbit2 3.5s linear infinite; }
+.orbital-particle:nth-child(3) { animation: orbit3 5s linear infinite; }
+
+/* Distortion controls */
+.distortion-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-size: 0.8em;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.distortion-toggle:hover {
+    background: rgba(100, 50, 200, 0.3);
+    border-color: rgba(150, 100, 255, 0.5);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(150, 100, 255, 0.4);
+}
+
+.distortion-toggle.active {
+    background: rgba(150, 100, 255, 0.4);
+    border-color: rgba(200, 150, 255, 0.7);
+    color: white;
+}
+
+.distortion-controls {
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.distortion-controls:hover {
+    background: rgba(0, 0, 0, 0.9) !important;
+}
+
+.distortion-controls input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+}
+
+.distortion-controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: rgba(200, 150, 255, 0.8);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.distortion-controls input[type="range"]::-webkit-slider-thumb:hover {
+    background: rgba(200, 150, 255, 1);
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(200, 150, 255, 0.5);
+}
+
+@keyframes fadeInParagraph {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.story-text p {
+    margin-bottom: 1.2em;
+    line-height: 1.8;
+}
+
+.cursed-paragraph {
+    animation: cursedGlitch 2s ease-in-out infinite !important;
+}
+
+.reduce-animations * {
+    animation-duration: 0.1s !important;
+    transition-duration: 0.1s !important;
+}
+
+.reduce-animations .story-particle {
+    display: none;
+}
+
+.reduce-animations .distortion-active {
+    filter: none !important;
+}

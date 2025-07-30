@@ -163,24 +163,6 @@
     filter: url(#distortionFilter) brightness(1.1);
 }
 
-/* Animation pour attirer l'attention sur le livre sur mobile */
-.clickable-zone.permanently-activated.book-pulse::after {
-    animation: bookPulse 2s ease-in-out infinite !important;
-}
-
-@keyframes bookPulse {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1) rotate(-2deg);
-        opacity: 0.6;
-        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.7));
-    }
-    50% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(2deg);
-        opacity: 1;
-        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
-    }
-}
-
 /* Sur mobile, augmenter la taille des zones pour faciliter le clic */
 @media (max-width: 768px) {
     .clickable-zone.permanently-activated::after {

@@ -1,3 +1,4 @@
+
 export class Fairy {
     constructor(lighting) {
         this.element = document.getElementById('blueEntity');
@@ -26,9 +27,11 @@ export class Fairy {
     }
 
     init() {
-        this.setupEventListeners();
-        this.setInitialPosition();
-        this.startMovement();
+        if (!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
+            this.setupEventListeners();
+            this.setInitialPosition();
+            this.startMovement();
+        }
     }
 
     setZoneManager(zoneManager) {

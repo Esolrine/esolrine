@@ -202,8 +202,8 @@ export class PerformanceProfiler {
 
     setupKeyboardShortcut() {
         document.addEventListener('keydown', (e) => {
-            // Ctrl/Cmd + Shift + P
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'P') {
+            // Shift + P
+            if (e.shiftKey && e.key === 'P') {
                 e.preventDefault();
                 this.toggle();
             }

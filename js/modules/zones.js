@@ -19,7 +19,6 @@ export class ZoneManager {
         this.isMobile = isMobile();
         this.mobileZoneOrder = ['1', '2', '3', '4', '5'];
         this.currentMobileZoneIndex = 0;
-        this.allNormalZonesCompleted = false;
 
         this.init();
     }
@@ -34,7 +33,9 @@ export class ZoneManager {
 
         // Écouter l'événement Athulan
         window.addEventListener('athulanAwakened', () => {
-            this.checkForAthulanActivation();
+            if (this.isMobile) {
+                this.initAthulanMobileSequence();
+            }
         });
     }
 
@@ -44,23 +45,11 @@ export class ZoneManager {
             this.fairy.element.style.display = 'none';
         }
 
-        // Si Athulan est déjà actif et toutes les zones sont complétées, activer Athulan
+        // Vérifier si on est en mode Athulan
         if (document.body.getAttribute('data-realm') === 'athulan') {
-            // Vérifier si toutes les zones normales sont déjà activées (cas du rechargement de page)
-            const allActivated = this.mobileZoneOrder.every(zoneNum => {
-                const zone = document.querySelector(`.zone-${zoneNum}`);
-                return zone && zone.classList.contains('permanently-activated');
-            });
-
-            if (allActivated) {
-                this.allNormalZonesCompleted = true;
-                this.currentMobileZoneIndex = this.mobileZoneOrder.length;
-                // Activer Athulan directement
-                setTimeout(() => {
-                    this.checkForAthulanActivation();
-                }, 1500);
-                return;
-            }
+            // Si Athulan, activer uniquement la zone Athulan
+            this.initAthulanMobileSequence();
+            return;
         }
 
         // Sinon, commencer la séquence normale
@@ -69,18 +58,41 @@ export class ZoneManager {
         }, 1500);
     }
 
+    initAthulanMobileSequence() {
+        console.log('[Athulan Mobile] Initializing Athulan sequence...');
+
+        // Cacher toutes les zones normales
+        document.querySelectorAll('.zone-1, .zone-2, .zone-3, .zone-4, .zone-5').forEach(zone => {
+            zone.style.display = 'none';
+        });
+
+        // Chercher la zone Athulan
+        const athulanZone = document.querySelector('.zone-athulan');
+
+        if (athulanZone) {
+            console.log('[Athulan Mobile] Zone found, activating...');
+
+            // S'assurer que la zone est visible
+            athulanZone.style.display = 'block';
+
+            // Ajouter l'attribut data-zone si manquant
+            if (!athulanZone.dataset.zone) {
+                athulanZone.dataset.zone = 'athulan';
+            }
+
+            // Activer la zone Athulan après un délai
+            setTimeout(() => {
+                this.activateMobileZone(athulanZone);
+            }, 1500);
+        }
+    }
+
     activateNextMobileZone() {
         console.log('[Mobile] Activating next zone. Current index:', this.currentMobileZoneIndex);
 
         if (this.currentMobileZoneIndex >= this.mobileZoneOrder.length) {
             // Toutes les zones normales sont activées
-            this.allNormalZonesCompleted = true;
             console.log('[Mobile] All normal zones completed!');
-
-            // Forcer une vérification immédiate d'Athulan
-            setTimeout(() => {
-                this.checkForAthulanActivation();
-            }, 500);
             return;
         }
 
@@ -298,42 +310,6 @@ export class ZoneManager {
         });
     }
 
-    checkForAthulanActivation() {
-        console.log('[Athulan Check] Checking activation conditions...');
-        console.log('- isMobile:', this.isMobile);
-        console.log('- allNormalZonesCompleted:', this.allNormalZonesCompleted);
-        console.log('- data-realm:', document.body.getAttribute('data-realm'));
-
-        // Ne vérifier que sur mobile et si toutes les zones normales sont complétées
-        if (!this.isMobile || !this.allNormalZonesCompleted) {
-            return;
-        }
-
-        // Vérifier si le mode Athulan est actif
-        if (document.body.getAttribute('data-realm') === 'athulan') {
-            const athulanZone = document.querySelector('.zone-athulan');
-            console.log('- Athulan zone found:', !!athulanZone);
-            console.log('- Already activated:', this.activatedZones.has('athulan'));
-
-            if (athulanZone && !this.activatedZones.has('athulan')) {
-                console.log('[Athulan] Activating zone on mobile...');
-
-                // S'assurer que la zone est visible
-                athulanZone.style.display = 'block';
-
-                // Ajouter l'attribut data-zone si manquant
-                if (!athulanZone.dataset.zone) {
-                    athulanZone.dataset.zone = 'athulan';
-                }
-
-                // Activer la zone Athulan après un délai
-                setTimeout(() => {
-                    this.activateMobileZone(athulanZone);
-                }, 1000);
-            }
-        }
-    }
-
     // Méthode appelée par StoryManager quand une histoire est fermée sur mobile
     onMobileStoryClosed(zoneNumber) {
         if (!this.isMobile) return;
@@ -348,8 +324,10 @@ export class ZoneManager {
             }, 1000);
         }
 
-        // Si c'était une zone normale, passer à la suivante
-        if (zoneNumber !== 'athulan' && this.mobileZoneOrder.includes(zoneNumber)) {
+        // Si on est en mode normal et c'était une zone normale, passer à la suivante
+        if (document.body.getAttribute('data-realm') !== 'athulan' &&
+            zoneNumber !== 'athulan' &&
+            this.mobileZoneOrder.includes(zoneNumber)) {
             this.currentMobileZoneIndex++;
             this.waitingForStoryRead = false;
 
@@ -360,7 +338,7 @@ export class ZoneManager {
         }
         // Si c'était Athulan, on a fini
         else if (zoneNumber === 'athulan') {
-            console.log('[Athulan] All zones explored, including Athulan!');
+            console.log('[Athulan] Story read completed!');
             this.waitingForStoryRead = false;
 
             // Optionnel : Ajouter un effet de fin ou un message
@@ -398,21 +376,6 @@ export class ZoneManager {
                 athulanZone.classList.remove('final-glow');
                 style.remove();
             }, 12000);
-        }
-    }
-
-    // Méthode pour forcer la vérification de l'état (utile pour le debug)
-    forceCheckCompletion() {
-        // Vérifier si toutes les zones normales sont activées
-        const allActivated = this.mobileZoneOrder.every(zoneNum => {
-            return this.activatedZones.has(zoneNum);
-        });
-
-        if (allActivated) {
-            this.allNormalZonesCompleted = true;
-            this.currentMobileZoneIndex = this.mobileZoneOrder.length;
-            console.log('All normal zones completed, checking for Athulan...');
-            this.checkForAthulanActivation();
         }
     }
 }

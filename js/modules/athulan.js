@@ -71,13 +71,6 @@ export class AthulanMode {
 
         // Add corruption to console
         this.startConsoleCorruption();
-
-        // Check if ZoneManager should activate Athulan zone
-        setTimeout(() => {
-            if (window.esolrineGame && window.esolrineGame.zoneManager) {
-                window.esolrineGame.zoneManager.checkForAthulanActivation();
-            }
-        }, 100);
     }
 
     deactivate() {

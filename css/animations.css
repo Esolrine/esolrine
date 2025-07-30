@@ -1,3 +1,4 @@
+/* file: css/animations.css */
 /* Zone animations */
 @keyframes handDrawnQuestion {
     0%, 100% { transform: rotate(-5deg) skewX(-5deg) scale(1); }
@@ -7,30 +8,15 @@
 }
 
 @keyframes loadingProgress {
-    0% {
-        border-color: rgba(255, 255, 255, 0.01);
-    }
-    50% {
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-    100% {
-        border-color: rgb(255, 255, 255);
-    }
+    0% { border-color: rgba(255, 255, 255, 0.01); }
+    50% { border-color: rgba(255, 255, 255, 0.3); }
+    100% { border-color: rgb(255, 255, 255); }
 }
 
 @keyframes questionMarkAppear {
-    0% {
-        color: rgba(255, 255, 255, 0.05);
-        transform: scale(0.8) rotate(-5deg) skewX(-5deg);
-    }
-    50% {
-        color: rgba(255, 255, 255, 0.2);
-        transform: scale(1.2) rotate(-5deg) skewX(-5deg);
-    }
-    100% {
-        color: rgba(255, 255, 255, 0.4);
-        transform: scale(1) rotate(-5deg) skewX(-5deg);
-    }
+    0% { color: rgba(255, 255, 255, 0.05); transform: scale(0.8) rotate(-5deg) skewX(-5deg); }
+    50% { color: rgba(255, 255, 255, 0.2); transform: scale(1.2) rotate(-5deg) skewX(-5deg); }
+    100% { color: rgba(255, 255, 255, 0.4); transform: scale(1) rotate(-5deg) skewX(-5deg); }
 }
 
 @keyframes gentleColorGlow {
@@ -47,16 +33,8 @@
 
 @keyframes zoneZoomEffect {
     0% { transform: scale(1); }
-    50% {
-        transform: scale(1.05);
-        filter: brightness(1.2) saturate(1.2);
-        box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
-    }
-    100% {
-        transform: scale(1.02);
-        filter: brightness(1.1) saturate(1.1);
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
-    }
+    50% { transform: scale(1.05); filter: brightness(1.2) saturate(1.2); box-shadow: 0 0 40px rgba(255, 255, 255, 0.6); }
+    100% { transform: scale(1.02); filter: brightness(1.1) saturate(1.1); box-shadow: 0 0 30px rgba(255, 255, 255, 0.4); }
 }
 
 /* Background animations */
@@ -67,7 +45,7 @@
     75% { transform: scale(1.001) rotate(0.02deg); }
 }
 
-/* Fairy animations */
+/* --- Fairy animations (RESTAURÉES À LEUR ÉTAT ORIGINAL) --- */
 @keyframes divineBreathing {
     0%, 100% {
         transform: scale(1);
@@ -96,39 +74,21 @@
 
 /* Orbital particles */
 @keyframes orbit1 {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg) translateX(35px) rotate(0deg);
-        opacity: 1;
-    }
+    0% { transform: translate(-50%, -50%) rotate(0deg) translateX(35px) rotate(0deg); opacity: 1; }
     50% { opacity: 0.6; }
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg) translateX(35px) rotate(-360deg);
-        opacity: 1;
-    }
+    100% { transform: translate(-50%, -50%) rotate(360deg) translateX(35px) rotate(-360deg); opacity: 1; }
 }
 
 @keyframes orbit2 {
-    0% {
-        transform: translate(-50%, -50%) rotate(120deg) translateX(45px) rotate(-120deg);
-        opacity: 0.8;
-    }
+    0% { transform: translate(-50%, -50%) rotate(120deg) translateX(45px) rotate(-120deg); opacity: 0.8; }
     50% { opacity: 0.4; }
-    100% {
-        transform: translate(-50%, -50%) rotate(480deg) translateX(45px) rotate(-480deg);
-        opacity: 0.8;
-    }
+    100% { transform: translate(-50%, -50%) rotate(480deg) translateX(45px) rotate(-480deg); opacity: 0.8; }
 }
 
 @keyframes orbit3 {
-    0% {
-        transform: translate(-50%, -50%) rotate(240deg) translateX(25px) rotate(-240deg);
-        opacity: 0.9;
-    }
+    0% { transform: translate(-50%, -50%) rotate(240deg) translateX(25px) rotate(-240deg); opacity: 0.9; }
     50% { opacity: 0.5; }
-    100% {
-        transform: translate(-50%, -50%) rotate(600deg) translateX(25px) rotate(-600deg);
-        opacity: 0.9;
-    }
+    100% { transform: translate(-50%, -50%) rotate(600deg) translateX(25px) rotate(-600deg); opacity: 0.9; }
 }
 
 /* Story animations */
@@ -148,40 +108,18 @@
 }
 
 @keyframes storyParticleFloat {
-    0% {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.3;
-    }
-    90% {
-        opacity: 0.3;
-    }
-    100% {
-        transform: translateY(-10vh);
-        opacity: 0;
-    }
+    0% { transform: translateY(110vh); opacity: 0; }
+    10% { opacity: 0.3; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-10vh); opacity: 0; }
 }
 
 @keyframes cursorCenterPulse {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.9;
-    }
-    50% {
-        transform: translate(-50%, -50%) scale(1.5);
-        opacity: 0.6;
-    }
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.6; }
 }
 
 @keyframes trailFade {
-    0% {
-        opacity: 0.5;
-        transform: scale(1) rotate(0deg);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.5) rotate(180deg);
-    }
+    0% { opacity: 0.5; transform: scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: scale(0.5) rotate(180deg); }
 }

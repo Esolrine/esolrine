@@ -1,5 +1,5 @@
+/* file: css/effects.css */
 /* Space background effects */
-
 .space-depth-layer {
     position: fixed;
     top: 0; left: 0;
@@ -50,6 +50,10 @@
     cursor: none;
     z-index: 15;
     animation: divineBreathing 2s ease-in-out infinite;
+
+    /* --- ÉTAT ORIGINAL RESTAURÉ --- */
+    /* Positionnement initial pour centrer l'élément sur son point de coordonnée,
+       qui sera ensuite défini par le JS via top/left. */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -88,8 +92,6 @@
 .orbital-particle:nth-child(1) { animation: orbit1 4s linear infinite; }
 .orbital-particle:nth-child(2) { animation: orbit2 3.5s linear infinite; }
 .orbital-particle:nth-child(3) { animation: orbit3 5s linear infinite; }
-
-/* Les contrôles de distorsion et les classes pour réduire les animations ont été supprimés car non utilisés */
 
 @keyframes fadeInParagraph {
     from {

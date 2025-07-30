@@ -1,8 +1,13 @@
-/* --- Recommandation de Performance --- */
-/* Pour de meilleures performances de chargement, déplacez cette importation dans la balise <head> de votre HTML. */
-/* <link rel="preconnect" href="https://fonts.googleapis.com"> */
-/* <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> */
-/* <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap" rel="stylesheet"> */
+/* file: css/zones.css */
+/* --- Recommandation de Performance : Très Important ! --- */
+/* L'utilisation de @import en CSS bloque le rendu de la page pendant que la police est téléchargée.
+   Pour un chargement optimal, supprimez la ligne @import ci-dessous et ajoutez les lignes suivantes
+   dans la balise <head> de votre fichier index.html :
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap" rel="stylesheet">
+*/
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
 
 /* --- Styles de base des zones --- */
@@ -16,8 +21,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Transition optimisée : ne cible que les propriétés qui changent */
     transition: border-color 2s ease, background-color 2s ease, opacity 2s ease;
+
+    /* --- OPTIMISATION --- */
+    /* Prépare les zones aux changements fréquents (hover, activation).
+       Ceci place l'élément sur sa propre couche de composition,
+       réduisant drastiquement le coût de "Recalculate Style". */
+    will-change: transform, opacity, border-color, filter;
 }
 
 /* --- Position des zones --- */
@@ -38,7 +48,6 @@
     z-index: 5;
     transform: rotate(-5deg) skewX(-5deg);
     animation: handDrawnQuestion 4s ease-in-out infinite;
-    /* Transition optimisée */
     transition: color 0.3s ease, text-shadow 0.5s ease;
 }
 
@@ -52,7 +61,7 @@
 
 /* --- État d'activation en cours --- */
 .clickable-zone.activating {
-    transition: border-color 0.1s ease; /* Transition rapide et spécifique */
+    transition: border-color 0.1s ease;
     border-color: rgba(255, 255, 255, 0.1);
     animation: loadingProgress 3s ease-in-out forwards;
 }
@@ -64,28 +73,22 @@
 }
 
 
-/* --- État activé permanent (FACTORISÉ avec des variables CSS) --- */
 .clickable-zone.permanently-activated {
-    /* Les variables sont définies plus bas pour chaque zone */
     background-image: var(--bg-image);
     border: 2px solid var(--zone-color-soft);
     box-shadow: inset 0 0 60px var(--zone-color-deep), 0 0 20px var(--zone-color-soft);
-
-    opacity: 0.2; /* !important retiré pour une meilleure gestion des styles */
+    opacity: 0.2;
     border-radius: 35px 20px 40px 25px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    backdrop-filter: blur(3px); /* Note : propriété coûteuse en performance */
     pointer-events: auto;
     cursor: pointer;
     filter: none;
     animation: gentleColorGlow 8s ease-in-out infinite;
 
-    /* Transition optimisée pour cet état */
     transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     border-radius 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    backdrop-filter 0.8s ease,
     border-color 0.4s ease,
     box-shadow 0.4s ease;
 }
@@ -139,16 +142,14 @@
     color: rgba(255, 255, 255, 0.6);
     z-index: 9999;
     pointer-events: none;
-    /* Transition optimisée */
     transition: font-size 0.3s ease, color 0.3s ease, text-shadow 0.3s ease, filter 0.3s ease;
 }
 
 /* --- Effets de survol (hover) sur les zones activées --- */
 .clickable-zone.permanently-activated:hover {
-    opacity: 1; /* Le sélecteur :hover est plus spécifique, pas besoin de !important */
+    opacity: 1;
     filter: none;
     border: 4px solid rgba(255, 255, 255, 0.9);
-    /* Transition plus spécifique pour le hover */
     transition: opacity 0.4s ease, border 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -183,21 +184,16 @@
 /* --- Styles pour mobile --- */
 @media (max-width: 768px) {
     .clickable-zone.permanently-activated::after {
-        font-size: 5rem; /* Icône plus grande pour une meilleure visibilité */
+        font-size: 5rem;
     }
 
     .clickable-zone.permanently-activated:hover::after {
-        font-size: 5.5rem; /* Légère augmentation au toucher/survol */
+        font-size: 5.5rem;
     }
 }
 
 
 /* --- Classe utilitaire pour l'accessibilité --- */
-/*
-  À utiliser pour cacher visuellement du texte tout en le gardant
-  accessible aux lecteurs d'écran.
-  Ex: <span class="visually-hidden">Description de l'action</span>
-*/
 .visually-hidden {
     position: absolute;
     width: 1px;

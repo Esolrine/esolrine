@@ -1,3 +1,4 @@
+/* file: css/main.css */
 /* Reset and base styles */
 * {
     margin: 0;
@@ -76,8 +77,13 @@ main {
     height: 30px;
     pointer-events: none;
     z-index: 10000;
-    transition: transform 0.1s ease-out;
+    /* transition: transform 0.1s ease-out; MODIFIÉ : Le mouvement est géré en JS via transform */
     mix-blend-mode: difference;
+
+    /* --- OPTIMISATION --- */
+    /* Prépare le curseur à être animé sur sa propre couche de composition,
+       ce qui est crucial pour les mouvements fluides à chaque frame. */
+    will-change: transform;
 }
 
 .custom-cursor::before {
@@ -138,4 +144,9 @@ body.custom-cursor-active * {
     z-index: 9999;
     animation: trailFade 1s ease-out forwards;
     filter: url(#distortionFilter);
+
+    /* --- OPTIMISATION --- */
+    /* Prépare également les particules du sillage pour des animations
+       performantes de transformation et de fondu. */
+    will-change: transform, opacity;
 }

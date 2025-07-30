@@ -10,8 +10,6 @@ export class DynamicLighting {
         this.zoneCoordinates = this.calculateZoneCoordinates();
 
         this.fairyPosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-
-        this.animate();
     }
 
     resizeCanvas() {
@@ -37,55 +35,5 @@ export class DynamicLighting {
 
     illuminateZone(zoneId) {
         this.illuminatedZones.add(zoneId);
-    }
-
-    drawZoneLights() {
-        this.illuminatedZones.forEach(zoneId => {
-            const zone = this.zoneCoordinates[zoneId];
-            if (!zone) return;
-
-            const centerX = zone.x + zone.width / 2;
-            const centerY = zone.y + zone.height / 2;
-            const baseRadius = Math.max(zone.width, zone.height) * 0.6;
-
-            const colorConfigs = {
-                1: { r: 255, g: 120, b: 80 },
-                2: { r: 200, g: 120, b: 255 },
-                3: { r: 120, g: 255, b: 150 },
-                4: { r: 120, g: 200, b: 255 },
-                5: { r: 255, g: 220, b: 120 }
-            };
-
-            const colorConfig = colorConfigs[zoneId] || { r: 255, g: 255, b: 255 };
-
-            for (let i = 0; i < 3; i++) {
-                const radius = baseRadius * (1 + i * 0.3);
-                const intensity = 0.008 * (1 - i * 0.4);
-
-                const gradient = this.ctx.createRadialGradient(
-                    centerX, centerY, 0,
-                    centerX, centerY, radius
-                );
-
-                gradient.addColorStop(0, `rgba(${colorConfig.r}, ${colorConfig.g}, ${colorConfig.b}, ${intensity})`);
-                gradient.addColorStop(0.3, `rgba(${colorConfig.r}, ${colorConfig.g}, ${colorConfig.b}, ${intensity * 0.7})`);
-                gradient.addColorStop(0.6, `rgba(${colorConfig.r}, ${colorConfig.g}, ${colorConfig.b}, ${intensity * 0.4})`);
-                gradient.addColorStop(1, `rgba(${colorConfig.r}, ${colorConfig.g}, ${colorConfig.b}, 0)`);
-
-                this.ctx.fillStyle = gradient;
-                this.ctx.fillRect(
-                    centerX - radius,
-                    centerY - radius,
-                    radius * 2,
-                    radius * 2
-                );
-            }
-        });
-    }
-
-    animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.drawZoneLights();
-        requestAnimationFrame(() => this.animate());
     }
 }

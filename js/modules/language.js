@@ -2,6 +2,7 @@ export class LanguageManager {
     constructor() {
         this.currentLanguage = 'fr';
         this.supportedLanguages = ['fr', 'en'];
+        this.isMobile = this.detectMobile();
 
         // Traductions
         this.translations = {
@@ -45,7 +46,7 @@ export class LanguageManager {
                     },
                     athulan: {
                         title: "█████",
-                        text: "̺̾W̴̤̋ȟ̴̫á̸̺t̷̖̿ ̴̘͆î̸̦s̷̩̀ ̴̪͑█̴͔̍█̸̞͒█̸̙͌█̵̘̈́█̷̗̌ ̵̰͝?̸̱͌"
+                        text: this.isMobile ? "What is █████ ?" : "̺̾W̴̤̋ȟ̴̫á̸̺t̷̖̿ ̴̘͆î̸̦s̷̩̀ ̴̪͑█̴͔̍█̸̞͒█̸̙͌█̵̘̈́█̷̗̌ ̵̰͝?̸̱͌"
                     }
                 },
                 ui: {
@@ -93,7 +94,7 @@ export class LanguageManager {
                     },
                     athulan: {
                         title: "█████",
-                        text: "̺̾W̴̤̋ȟ̴̫á̸̺t̷̖̿ ̴̘͆î̸̦s̷̩̀ ̴̪͑█̴͔̍█̸̞͒█̸̙͌█̵̘̈́█̷̗̌ ̵̰͝?̸̱͌"
+                        text: this.isMobile ? "What is █████ ?" : "̺̾W̴̤̋ȟ̴̫á̸̺t̷̖̿ ̴̘͆î̸̦s̷̩̀ ̴̪͑█̴͔̍█̸̞͒█̸̙͌█̵̘̈́█̷̗̌ ̵̰͝?̸̱͌"
                     }
                 },
                 ui: {
@@ -106,9 +107,36 @@ export class LanguageManager {
         this.init();
     }
 
+    detectMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+               (window.innerWidth <= 768);
+    }
+
     init() {
         this.detectLanguage();
         this.setupLanguageObserver();
+        
+        // Détecter les changements de taille d'écran
+        window.addEventListener('resize', () => {
+            const wasMobile = this.isMobile;
+            this.isMobile = this.detectMobile();
+            
+            // Si on change de mobile à desktop ou vice versa, mettre à jour les textes
+            if (wasMobile !== this.isMobile) {
+                this.updateAthulanText();
+            }
+        });
+    }
+
+    updateAthulanText() {
+        // Mettre à jour le texte Athulan selon le type d'appareil
+        const athulanText = this.isMobile ? "What is █████ ?" : "̺̾W̴̤̋ȟ̴̫á̸̺t̷̖̿ ̴̘͆î̸̦s̷̩̀ ̴̪͑█̴͔̍█̸̞͒█̸̙͌█̵̘̈́█̷̗̌ ̵̰͝?̸̱͌";
+        
+        this.translations.fr.stories.athulan.text = athulanText;
+        this.translations.en.stories.athulan.text = athulanText;
+        
+        // Émettre un événement pour signaler le changement
+        window.dispatchEvent(new CustomEvent('athulanTextUpdated', { detail: { isMobile: this.isMobile } }));
     }
 
     detectLanguage() {

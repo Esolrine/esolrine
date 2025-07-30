@@ -49,32 +49,10 @@
     transition: all 0.3s ease;
     cursor: none;
     z-index: 15;
-    filter: drop-shadow(0 0 15px rgba(100, 200, 255, 0.8));
     animation: divineBreathing 2s ease-in-out infinite;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-/* Energy states */
-.blue-entity.energy-high {
-    filter: drop-shadow(0 0 20px rgba(100, 200, 255, 1)) brightness(1.2);
-    animation: divineBreathing 2s ease-in-out infinite;
-}
-
-.blue-entity.energy-medium {
-    filter: drop-shadow(0 0 15px rgba(100, 200, 255, 0.7)) brightness(1);
-    animation: divineBreathingTired 3.5s ease-in-out infinite;
-}
-
-.blue-entity.energy-low {
-    filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.5)) brightness(0.8);
-    animation: divineBreathingExhausted 4.5s ease-in-out infinite;
-}
-
-.blue-entity.energy-exhausted {
-    filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.3)) brightness(0.6);
-    animation: divineBreathingCollapsed 6s ease-in-out infinite;
 }
 
 /* State modifiers */
@@ -94,7 +72,6 @@
 
 .blue-entity.zone-completed {
     filter: brightness(1.6) saturate(1.8) drop-shadow(0 0 20px rgba(100, 200, 255, 0.8));
-    animation: fairyCompleted 3s ease-in-out infinite;
 }
 
 /* Orbital particles */

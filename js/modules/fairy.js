@@ -1,7 +1,6 @@
 export class Fairy {
     constructor(lighting) {
         this.element = document.getElementById('blueEntity');
-        this.gameArea = document.getElementById('gameArea');
         this.lighting = lighting;
         this.zoneManager = null;
 
@@ -9,7 +8,6 @@ export class Fairy {
         this.position = { x: window.innerWidth * 0.5, y: window.innerHeight * 0.5 };
         this.velocity = { x: 0, y: 0 };
         this.mousePos = { x: 0, y: 0 };
-        this.targetPos = { x: window.innerWidth * 0.5, y: window.innerHeight * 0.5 };
 
         // Behavior parameters - MODIFIÉS pour des mouvements plus amples
         this.fleeDistance = 200; // Réduit de 350 pour interaction plus proche
@@ -24,18 +22,12 @@ export class Fairy {
         this.wanderDistance = 150; // Augmenté de 100
         this.wanderChangeRate = 0.02; // Réduit de 0.05 pour changements plus doux
 
-        // Energy system
-        this.energy = 100;
-        this.maxEnergy = 100;
-        this.energyLossPerZone = 20;
-
         this.init();
     }
 
     init() {
         this.setupEventListeners();
         this.setInitialPosition();
-        this.updateEnergyVisual();
         this.startMovement();
     }
 
@@ -109,7 +101,7 @@ export class Fairy {
         const direction = this.getDirection(this.mousePos, this.position);
 
         // Force de base plus douce
-        let force = repulsionStrength * 0.3; // Réduit pour mouvements plus calmes
+        let force;
 
         // Courbe de force exponentielle pour interaction plus naturelle
         if (repulsionStrength > 0.8) {
@@ -251,26 +243,6 @@ export class Fairy {
             x: (to.x - from.x) / distance,
             y: (to.y - from.y) / distance
         };
-    }
-
-    updateEnergyVisual() {
-        this.element.classList.remove('energy-high', 'energy-medium', 'energy-low', 'energy-exhausted');
-
-        if (this.energy > 75) {
-            this.element.classList.add('energy-high');
-        } else if (this.energy > 50) {
-            this.element.classList.add('energy-medium');
-        } else if (this.energy > 25) {
-            this.element.classList.add('energy-low');
-        } else {
-            this.element.classList.add('energy-exhausted');
-        }
-
-        if (this.energy < 30) {
-            this.element.classList.add('stumbling');
-        } else {
-            this.element.classList.remove('stumbling');
-        }
     }
 
     startLoadingAnimation() {

@@ -9,6 +9,7 @@ import { AthulanMode } from './modules/athulan.js';
 import { MusicManager } from './modules/music.js';
 import { LanguageManager } from './modules/language.js';
 import { LanguageUI } from './modules/languageUI.js';
+import { PerformanceProfiler } from './modules/performanceProfiler.js';
 
 class EsolrineGame {
     constructor() {
@@ -22,6 +23,7 @@ class EsolrineGame {
         this.musicManager = null;
         this.languageManager = null;
         this.languageUI = null;
+        this.performanceProfiler = window.performanceProfiler;
 
         this.init();
     }

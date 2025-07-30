@@ -50,7 +50,7 @@
     animation: globeSpin 2s ease-in-out infinite;
 }
 
-/* Dropdown Menu */
+/* Dropdown Menu - Desktop */
 .language-dropdown {
     position: absolute;
     bottom: calc(100% + 10px);
@@ -74,7 +74,7 @@
     transform: translateX(-50%) scale(1);
 }
 
-/* Dropdown arrow */
+/* Dropdown arrow - Desktop */
 .language-dropdown::after {
     content: '';
     position: absolute;
@@ -126,7 +126,7 @@
     text-align: left;
 }
 
-/* Mobile adjustments */
+/* Mobile adjustments - CORRIGÉ */
 @media (max-width: 768px) {
     .controls-container {
         flex-wrap: wrap;
@@ -137,22 +137,52 @@
         order: -1; /* Place it first on mobile */
     }
 
+    /* Sur mobile, le dropdown apparaît AU-DESSUS du bouton */
     .language-dropdown {
         bottom: auto;
-        top: calc(100% + 10px);
+        top: auto;
         left: 0;
-        transform: translateX(0) scale(0.9);
+        right: auto;
+        transform: translateX(0) translateY(-10px);
+
+        /* Positionnement dynamique */
+        position: fixed;
+        bottom: 80px; /* Au-dessus des contrôles */
+        max-height: 50vh; /* Limite la hauteur */
+        overflow-y: auto; /* Scroll si nécessaire */
     }
 
     .language-dropdown.active {
-        transform: translateX(0) scale(1);
+        transform: translateX(0) translateY(0);
     }
 
+    /* Flèche pointant vers le bas sur mobile */
     .language-dropdown::after {
         top: auto;
-        bottom: 100%;
+        bottom: -8px;
         border-top: none;
-        border-bottom: 8px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 8px solid rgba(20, 20, 30, 0.95);
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+    }
+
+    /* Ajuster la largeur sur mobile */
+    .language-option {
+        width: 160px;
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+
+    .flag {
+        font-size: 1.4rem;
+    }
+}
+
+/* Pour les très petits écrans */
+@media (max-height: 500px) {
+    .language-dropdown {
+        bottom: 70px; /* Encore plus proche du bouton */
+        max-height: 40vh;
     }
 }
 
@@ -221,4 +251,13 @@ body[data-realm="athulan"] .language-option.active {
 
 .language-option[data-lang="en"] .flag {
     filter: saturate(0.9) brightness(1.1);
+}
+
+/* Ajout d'une ombre pour améliorer la visibilité sur mobile */
+@media (max-width: 768px) {
+    .language-dropdown {
+        box-shadow:
+                0 -5px 20px rgba(0, 0, 0, 0.3),
+                0 10px 30px rgba(0, 0, 0, 0.5);
+    }
 }

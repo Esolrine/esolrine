@@ -7,14 +7,11 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/zones.css">
     <link rel="stylesheet" href="css/effects.css">
-    <link rel="stylesheet" href="css/filters.css">
     <link rel="stylesheet" href="css/overlays.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/athulan.css">
     <link rel="stylesheet" href="css/controls.css">
     <link rel="stylesheet" href="css/language.css">
-    <!-- The ancient realm awaits those who speak its name -->
-    <meta name="hidden-gateway" content="athulan-portal">
 </head>
 <body data-realm="standard">
 <!-- Background layers -->
@@ -39,7 +36,6 @@
             <div class="clickable-zone zone-athulan distortion-active hidden-realm" data-zone="athulan"></div>
 
             <!-- Effects canvases -->
-            <div class="darkness-overlay" id="darknessOverlay"></div>
             <canvas id="lightingCanvas"></canvas>
 
             <!-- Fairy entity -->
@@ -105,12 +101,7 @@
     Your browser does not support the audio element.
 </audio>
 
-<!-- Visual filters -->
-<div id="filmGrain"></div>
-<div id="bookFilter"></div>
-<div id="vignetteFilter"></div>
-<div id="mangaFilter"></div>
-<div id="comicFilter"></div>
+<!-- Les filtres visuels et leurs conteneurs HTML ont été supprimés car le script qui les contrôle était inutilisé. -->
 <!-- Athulan's mystical filter -->
 <div class="athulan-filter" id="athulanFilter" data-mystical-layer="true"></div>
 
@@ -143,9 +134,5 @@
 
 <!-- Scripts -->
 <script type="module" src="js/main.js"></script>
-<!-- Hidden message for the curious -->
-<script>
-    // The forgotten one whispers: "Speak my name in the address bar..."
-</script>
 </body>
 </html>

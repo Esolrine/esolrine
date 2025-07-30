@@ -50,7 +50,7 @@ export class LanguageManager {
                 },
                 ui: {
                     musicPrompt: "🎵 Cliquez n'importe où pour démarrer la musique",
-                    athulanMessage: "La passerelle se révèle à ceux qui connaissent le nom..."
+                    athulanMessage: "..."
                 }
             },
             en: {

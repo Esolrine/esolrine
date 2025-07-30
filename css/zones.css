@@ -69,12 +69,7 @@
     filter: none;
 }
 
-/* IMPORTANT: Maintain position for ALL zones including athulan */
-.clickable-zone.permanently-activated.zone-1 { top: 3vh; left: 3vw; width: 44vw; height: 44vh; }
-.clickable-zone.permanently-activated.zone-2 { top: 3vh; right: 3vw; width: 44vw; height: 44vh; }
-.clickable-zone.permanently-activated.zone-3 { bottom: 3vh; left: 3vw; width: 44vw; height: 44vh; }
-.clickable-zone.permanently-activated.zone-4 { bottom: 3vh; right: 3vw; width: 44vw; height: 44vh; }
-.clickable-zone.permanently-activated.zone-5 { top: 28vh; left: 28vw; width: 44vw; height: 44vh; }
+/* Les positions redondantes ont été supprimées car déjà définies pour .zone-X */
 
 .clickable-zone.permanently-activated::before {
     color: rgba(255, 255, 255, 0);

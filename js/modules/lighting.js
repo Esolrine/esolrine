@@ -1,9 +1,7 @@
-
 export class DynamicLighting {
     constructor() {
         this.canvas = document.getElementById('lightingCanvas');
         this.ctx = this.canvas.getContext('2d');
-        this.darknessOverlay = document.getElementById('darknessOverlay');
 
         this.resizeCanvas();
         window.addEventListener('resize', () => this.resizeCanvas());
@@ -12,7 +10,6 @@ export class DynamicLighting {
         this.zoneCoordinates = this.calculateZoneCoordinates();
 
         this.fairyPosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-        this.fairyEnergy = 1.0;
 
         this.animate();
     }
@@ -29,7 +26,7 @@ export class DynamicLighting {
             2: { x: window.innerWidth * 0.53, y: window.innerHeight * 0.03, width: window.innerWidth * 0.44, height: window.innerHeight * 0.44 },
             3: { x: window.innerWidth * 0.03, y: window.innerHeight * 0.53, width: window.innerWidth * 0.44, height: window.innerHeight * 0.44 },
             4: { x: window.innerWidth * 0.53, y: window.innerHeight * 0.53, width: window.innerWidth * 0.44, height: window.innerHeight * 0.44 },
-            5: { x: window.innerWidth * 0.28, y: window.innerHeight * 0.28, width: window.innerWidth * 0.44, height: window.innerHeight * 0.44 }
+            5: { x: window.innerWidth * 0.28, y: window.innerHeight * 28, width: window.innerWidth * 0.44, height: window.innerHeight * 0.44 }
         };
     }
 
@@ -38,32 +35,8 @@ export class DynamicLighting {
         this.fairyPosition.y = y;
     }
 
-    updateFairyEnergy(energy) {
-        this.fairyEnergy = energy;
-    }
-
     illuminateZone(zoneId) {
         this.illuminatedZones.add(zoneId);
-        this.updateSceneLighting();
-    }
-
-    updateSceneLighting() {
-        const numZones = this.illuminatedZones.size;
-        const overlay = this.darknessOverlay;
-
-        overlay.classList.remove('one-zone-lit', 'two-zones-lit', 'three-zones-lit', 'four-zones-lit', 'all-zones-lit');
-
-        if (numZones >= 5) {
-            overlay.classList.add('all-zones-lit');
-        } else if (numZones >= 4) {
-            overlay.classList.add('four-zones-lit');
-        } else if (numZones >= 3) {
-            overlay.classList.add('three-zones-lit');
-        } else if (numZones >= 2) {
-            overlay.classList.add('two-zones-lit');
-        } else if (numZones >= 1) {
-            overlay.classList.add('one-zone-lit');
-        }
     }
 
     drawZoneLights() {

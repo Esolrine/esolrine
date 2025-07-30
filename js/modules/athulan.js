@@ -2,7 +2,7 @@ export class AthulanMode {
     constructor() {
         this.isActive = false;
         this.mysticalMessages = [
-            "La passerelle se révèle à ceux qui connaissent le nom...",
+            "La page se révèle à ceux qui connaissent le nom...",
         ];
 
         // Set global indicator

@@ -203,12 +203,6 @@ export class StoryManager {
         const textContainer = document.createElement('div');
         textContainer.className = 'story-text-container distortion-active';
 
-        // Add image mask
-        const imageMask = document.createElement('div');
-        imageMask.className = 'story-image-mask';
-        imageMask.style.backgroundImage = `url('${story.image}')`;
-        textContainer.appendChild(imageMask);
-
         // Create title
         const title = document.createElement('h1');
         title.className = 'story-title distortion-active';
@@ -224,25 +218,13 @@ export class StoryManager {
             storyText.classList.add('cursed-text');
         }
 
-        // Create cursor
-        const cursor = document.createElement('span');
-        cursor.className = 'typewriter-cursor';
-
-        // Create decorative elements
-        const decorLeft = document.createElement('div');
-        decorLeft.className = 'story-decor-left';
-        const decorRight = document.createElement('div');
-        decorRight.className = 'story-decor-right';
-
         // Create close button
         const closeButton = document.createElement('div');
         closeButton.className = 'story-close-button';
 
         // Assemble elements
-        textContainer.appendChild(decorLeft);
         textContainer.appendChild(title);
         textContainer.appendChild(storyText);
-        textContainer.appendChild(decorRight);
 
         content.appendChild(textContainer);
 
@@ -260,7 +242,7 @@ export class StoryManager {
 
         // Start typewriter effect
         setTimeout(() => {
-            this.typeWriterEffect(storyText, story.text, cursor, zoneNumber === 'athulan');
+            this.typeWriterEffect(storyText, story.text, zoneNumber === 'athulan');
         }, 1500);
 
         // Event handlers
@@ -307,7 +289,7 @@ export class StoryManager {
         }, 800);
     }
 
-    typeWriterEffect(element, text, cursor = null, isCursed = false) {
+    typeWriterEffect(element, text, isCursed = false) {
         element.textContent = '';
 
         // Option 1 : Affichage par paragraphes (BEAUCOUP plus performant)

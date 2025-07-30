@@ -51,7 +51,6 @@ export class DistortionEffect {
 
     stop() {
         this.isActive = false;
-        this.controlsContainer.style.display = 'none';
 
         document.querySelectorAll('.clickable-zone').forEach(zone => {
             zone.classList.remove('distortion-active');
@@ -112,18 +111,5 @@ export class DistortionEffect {
         document.querySelectorAll('.clickable-zone').forEach(zone => {
             observer.observe(zone, { attributes: true });
         });
-    }
-
-    setIntensity(intensity) {
-        this.intensity = Math.max(0, Math.min(1, intensity));
-        this.intensitySlider.value = this.intensity * 100;
-    }
-
-    setAnimationSpeed(speed) {
-        this.animationSpeed = speed;
-        if (this.isActive && this.frameInterval) {
-            clearInterval(this.frameInterval);
-            this.startFrameAnimation();
-        }
     }
 }

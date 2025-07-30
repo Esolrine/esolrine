@@ -33,17 +33,7 @@ body[data-realm="athulan"] .zone-athulan {
     animation: athulanAwakening 3s ease-out forwards;
 }
 
-/* IMPORTANT: Override any position changes for Athulan zone */
-.zone-athulan.permanently-activated {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 60vw !important;
-    height: 60vh !important;
-    max-width: 600px !important;
-    max-height: 600px !important;
-}
+/* Les règles de position redondantes pour .zone-athulan.permanently-activated ont été supprimées */
 
 /* Ethereal veil effect */
 .ethereal-veil {
@@ -111,7 +101,7 @@ body[data-realm="athulan"] .athulan-filter {
     text-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
 }
 
-/* Athulan permanently activated state with position override */
+/* Athulan permanently activated state */
 .zone-athulan.permanently-activated {
     background-image: url('../assets/img/athulan.jpg');
     background-size: cover;
@@ -123,11 +113,6 @@ body[data-realm="athulan"] .athulan-filter {
             inset 0 0 60px rgba(75, 0, 130, 0.2);
     animation: athulanGlow 4s ease-in-out infinite;
     overflow: hidden;
-    /* Force center position */
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
 }
 
 .zone-athulan.permanently-activated::before {
@@ -283,10 +268,6 @@ body[data-realm="athulan"] .background-container {
 /* Additional fix for fade-in animation */
 .zone-athulan.permanently-activated.fade-in {
     animation: athulanImageAppear 4s ease-in-out forwards !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
 }
 
 @keyframes athulanImageAppear {

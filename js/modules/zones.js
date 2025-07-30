@@ -30,13 +30,6 @@ export class ZoneManager {
         if (this.isMobile) {
             this.initMobileSequence();
         }
-
-        // Écouter l'événement Athulan
-        window.addEventListener('athulanAwakened', () => {
-            if (this.isMobile) {
-                this.initAthulanMobileSequence();
-            }
-        });
     }
 
     initMobileSequence() {

@@ -48,11 +48,6 @@
     100% { opacity: 1; transform: scale(1); }
 }
 
-@keyframes bookAppear {
-    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-
 /* Book icon animation - continuous gentle pulse */
 @keyframes bookIcon {
     0%, 100% {
@@ -102,21 +97,6 @@
 }
 
 /* Background animations */
-@keyframes distantCelestialBodies {
-    0% { transform: translateX(0) translateY(0) rotate(0deg); }
-    25% { transform: translateX(-200px) translateY(-100px) rotate(90deg); }
-    50% { transform: translateX(-400px) translateY(-200px) rotate(180deg); }
-    75% { transform: translateX(-600px) translateY(-300px) rotate(270deg); }
-    100% { transform: translateX(-800px) translateY(-400px) rotate(360deg); }
-}
-
-@keyframes cosmicPulse {
-    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-    25% { transform: scale(1.2) rotate(90deg); opacity: 0.6; }
-    50% { transform: scale(0.8) rotate(180deg); opacity: 0.4; }
-    75% { transform: scale(1.1) rotate(270deg); opacity: 0.7; }
-}
-
 @keyframes backgroundDistortion {
     0%, 100% { transform: scale(1) rotate(0deg); }
     25% { transform: scale(1.002) rotate(0.05deg); }
@@ -246,21 +226,6 @@
     }
 }
 
-/* Filter animations */
-
-@keyframes filmGrain {
-    0% { transform: translate(0px, 0px); }
-    25% { transform: translate(-1px, 1px); }
-    50% { transform: translate(1px, -1px); }
-    75% { transform: translate(-1px, -1px); }
-    100% { transform: translate(1px, 1px); }
-}
-
-@keyframes mangaSpeed {
-    0%, 100% { transform: translateX(-100%); opacity: 0; }
-    50% { transform: translateX(100%); opacity: 1; }
-}
-
 /* Story animations */
 @keyframes storyContainerAppear {
     0% { opacity: 0; transform: translateY(20px); }
@@ -292,11 +257,6 @@
         transform: translateY(-10vh);
         opacity: 0;
     }
-}
-
-@keyframes decorFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(10px, -10px) scale(1.1); }
 }
 
 @keyframes cursorCenterPulse {

@@ -148,6 +148,10 @@ export class HandDrawnCursor {
     }
 
     createTrail() {
+        // NOUVEAU: Vérifier si le mode performance est actif
+        if (document.body.classList.contains('performance-mode-active')) {
+            return;
+        }
         if (this.isMobile) return;
 
         const trail = document.createElement('div');

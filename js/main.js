@@ -25,6 +25,9 @@ class EsolrineGame {
         this.languageUI = null;
         this.performanceProfiler = window.performanceProfiler;
 
+        // NOUVEAU
+        this.isPerformanceMode = false;
+
         this.init();
     }
 
@@ -52,18 +55,57 @@ class EsolrineGame {
         this.distortion = new DistortionEffect();
         this.cursor = new HandDrawnCursor();
 
+        // NOUVEAU: Initialiser le sélecteur de performance
+        this.setupPerformanceToggle();
+
         // Connect modules
         this.fairy.setZoneManager(this.zoneManager);
         this.storyManager.setZoneManager(this.zoneManager);
 
-        // Start distortion effect by default
-        this.distortion.start();
+        // Start distortion effect by default (if not in performance mode)
+        if (!this.isPerformanceMode) {
+            this.distortion.start();
+        }
 
         // Monitor URL changes
         this.setupURLMonitoring();
 
         // Observer pour détecter les changements d'attribut sur body
         this.setupRealmObserver();
+    }
+
+    // NOUVEAU: Méthode pour gérer le mode performance
+    setupPerformanceToggle() {
+        const toggle = document.getElementById('performanceToggle');
+        if (!toggle) return;
+
+        // Vérifier si une préférence est sauvegardée
+        const savedPerfMode = localStorage.getItem('esolrine-performance-mode') === 'true';
+        if (savedPerfMode) {
+            toggle.checked = true;
+            this.setPerformanceMode(true);
+        }
+
+        toggle.addEventListener('change', (e) => {
+            this.setPerformanceMode(e.target.checked);
+        });
+    }
+
+    // NOUVEAU: Méthode pour activer/désactiver le mode
+    setPerformanceMode(isActive) {
+        this.isPerformanceMode = isActive;
+        document.body.classList.toggle('performance-mode-active', isActive);
+
+        if (isActive) {
+            // Arrêter le script de distorsion pour économiser le CPU
+            this.distortion.stop();
+        } else {
+            // Redémarrer le script de distorsion
+            this.distortion.start();
+        }
+
+        // Sauvegarder la préférence
+        localStorage.setItem('esolrine-performance-mode', isActive);
     }
 
     setupURLMonitoring() {

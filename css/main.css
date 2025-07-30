@@ -150,3 +150,44 @@ body.custom-cursor-active * {
        performantes de transformation et de fondu. */
     will-change: transform, opacity;
 }
+
+/* NOUVEAU: Règles pour le Mode Performance */
+
+/* La classe .performance-mode-active sera ajoutée au body via JavaScript */
+
+/* 1. Désactiver le filtre de distorsion PARTOUT */
+body.performance-mode-active .distortion-active,
+body.performance-mode-active [style*="url(#distortionFilter)"] {
+    filter: none !important;
+}
+
+/* 2. Stopper les animations de fond coûteuses */
+body.performance-mode-active .background-container {
+    animation: none !important;
+}
+
+/* 3. Désactiver les animations subtiles mais gourmandes sur les zones */
+body.performance-mode-active .clickable-zone::before {
+    animation: none !important;
+}
+body.performance-mode-active .clickable-zone.permanently-activated {
+    animation: none !important;
+}
+
+/* 4. Désactiver l'animation du curseur (le point central) */
+body.performance-mode-active .custom-cursor::after {
+    animation: none !important;
+}
+
+/* 5. Désactiver les animations de l'overlay d'histoire pour un affichage plus rapide */
+body.performance-mode-active .story-text-container,
+body.performance-mode-active .story-title,
+body.performance-mode-active .story-close-button {
+    animation: none !important;
+    transform: none !important; /* Réinitialise les rotations/skew */
+}
+
+/* 6. Réduire drastiquement le nombre de particules */
+body.performance-mode-active .story-particle:nth-child(n+10) {
+    display: none; /* Cache toutes les particules sauf les 10 premières */
+}
